@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -15,10 +16,12 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
+  console.log(errors);
+
   const onSubmit = async (data: FormValues) => {
     console.log(data);
   };
-
+  
   return (
     <div className="my-10 w-[90%] mx-auto">
       <h1 className="text-center text-4xl mb-5 font-bold">
@@ -102,7 +105,10 @@ const LoginPage = () => {
                 alt="Google logo"
               />
             </button>
-            <button className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full shadow-md hover:bg-gray-200">
+            <button
+              onClick={() => signIn()}
+              className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full shadow-md hover:bg-gray-200"
+            >
               <Image
                 src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
                 width={25}
